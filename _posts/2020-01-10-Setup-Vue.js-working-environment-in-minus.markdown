@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "Setup Vue.js working environment in minus"
+date:   2020-01-10 19:51:07 +0800
+categories: vue front
+---
+
+Every so often, there will be some front-end work. Because they are not my major work. I may forgot the details.
+So noting them could save my time.
+
+## Install Node.js
+
+If you are using Win and Mac, just download install package and double click it. Follow the instructions.
+
+If you are using Linux. Follow the instruction from the [site](https://github.com/nodejs/help/wiki/Installation).
+
+## Install Vue.js
+
+In fact, we will talk about install vue cli tool.
+
+`npm install -g @vue/cli`
+
+## Create Vue.js project
+
+`vue create hello-world`
+
+This command will create a folder named `hello-world`. It contains the basic file used by vue.
+
+`./hello-world/README.md` will tell us how to use this project with npm.
+
+## Set dev proxy
+
+The file `./hello-world/vue.config.js` will be used by vue to store some config.
+The config below could set a dev proxy for development.
+
+```js
+module.exports = {
+    devServer: {
+        open: true,
+        host: 'localhost',
+        port: 8080,
+        https: false,
+        hotOnly: false,
+        proxy: {
+            '/api': {
+                target: 'http://172.16.0.2:8800/api/',
+                ws: true,
+                changOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        },
+        before: app => { }
+    },
+}
+```
