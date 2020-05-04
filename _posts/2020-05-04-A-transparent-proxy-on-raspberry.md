@@ -1,5 +1,3 @@
-# A transparent proxy on Raspberry 
-
 ---
 layout: post
 title:  "A transparent proxy on Raspberry"
@@ -32,7 +30,7 @@ network:
     version: 2
 ```
 
-3. Change system DNS(`/etc/resolv.conf`) to `127.0.0.1`
+3. Change system DNS(`/etc/resolv.conf`) to `192.168.1.202`
 
 ## Clash
 
