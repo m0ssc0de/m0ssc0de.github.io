@@ -11,10 +11,10 @@ summary:
 The name of "Embark Studios" was unfamiliar for me at first. But by some searches on Google, I found they are "old friends".
 So I write this blog and want to make a contribution to them.
 
-The team of Embark Studios came from EA and DICE. They made "Battlefield" which I spend lots of weekends at high school.
-I can't forget the feelings of reversing the situation in "Battlefield". Usually, in the beginning, we stay at the last control point.
-enemy's helicopter was hovering in the air. Lots of vehicles rush in. With the cooperation, we go through the defense hardly.
-Then get another one control point. Then two, then three. Oh, that pressure and concentration consume so many hormones.
+The team of Embark Studios came from EA and DICE. They made "Battlefield" which I spent lots of weekends at high school.
+I can't forget the feelings of reversing the situation in "Battlefield". Usually, in the beginning, we stayed at the last control point.
+Enemy's helicopter was hovering in the air. Lots of vehicles rushed in. With the cooperation, we went through the defense hardly.
+Then got another one control point. Then two, then three. Oh, that pressure and concentration consumed so many hormones.
 I miss those guys who fought together. And the investor of Embark is familiar too. "NEXON“ made "Kart rider" which I played a lot too.
 My brain has been full of its iconic background music and brake sound effects right now. I miss the time when we hang out to internet cafes.
 
