@@ -67,7 +67,7 @@ Buildkite is a CI SaaS, similar to Drone.io. But can not be on-premise.
 
 `cargo-fetch` could use third party storage to cache crate.io.
 
-`krates` could graph the relationship of all dependencies by `Cargo.toml`.j
+`krates` could graph the relationship of all dependencies by `Cargo.toml`
 It looks like need to update semver's version. There are two related PR didn't execute.
 I don't know why. Maybe there are other reasons.
 
