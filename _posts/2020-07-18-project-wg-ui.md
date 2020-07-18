@@ -52,7 +52,7 @@ Four major components are `EditClient`, `NewClient`, `About`, `Clients`. The des
 
 
 - `Errors should give more context`. Running in docker and errors for "operation not supported". This maybe relates to network cap or userspace wireguard. Need to reproduce on Debian.
-- `Possibility to hide or remove a "newClient" button`. Control `newClient` button base on the number of clients. Need to familiar Svelte.
+- `Possibility to hide or remove a "newClient" button`. Control `newClient` button base on the number of clients. Need to familiar Svelte. Maybe need add API.
 - `Kubernetes`. Similar to the first one. Experiments with isolated and non-isolated networks could be arranged.
 - `ipv6 support`. Need to familiar config `ipv6`.
 
