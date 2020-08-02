@@ -56,7 +56,7 @@ list is useless for me. So we could make a simple pipeline to create a manifest 
 # docker push m0ssc0de/wg-go-ui-arm64:v1.0.2
 
 # 2. create manifest list
-docker manifest creat m0ssc0de/wg-go-ui:v1.0.2 \
+docker manifest create m0ssc0de/wg-go-ui:v1.0.2 \
 		m0ssc0de/wg-go-ui-amd64:v1.0.2 \
 		m0ssc0de/wg-go-ui-arm64:v1.0.2
 
