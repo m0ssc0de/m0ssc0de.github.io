@@ -61,8 +61,8 @@ docker manifest create m0ssc0de/wg-go-ui:v1.0.2 \
 		m0ssc0de/wg-go-ui-arm64:v1.0.2
 
 # 3. annotate image
-docker manifest annotate m0ssc0de/wg-go-ui-amd64:v1.0.2 --arch amd64
-docker manifest annotate m0ssc0de/wg-go-ui-arm64:v1.0.2 --arch arm64
+docker manifest annotate m0ssc0de/wg-go-ui:1.0.2 m0ssc0de/wg-go-ui-amd64:v1.0.2 --arch amd64
+docker manifest annotate m0ssc0de/wg-go-ui:1.0.2 m0ssc0de/wg-go-ui-arm64:v1.0.2 --arch arm64
 
 # 4. push manifest
 docker manifest push m0ssc0de/wg-go-ui:1.0.2 --purge
