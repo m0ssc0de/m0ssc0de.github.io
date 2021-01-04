@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Burrows-Wheeler transform (BWT)"
+title:  "How FM-index works"
 date:   2020-08-30 23:30:07 +0800
 category: bio
 author: m0ssc0de
@@ -66,22 +66,26 @@ Now there are two array, `sa [6, 1, 3, 2, 4, 5]`, `bwt ['C', '$', 'B', 'A', 'A',
 
 First, create a table. Count number of characters that are small than the current characters in the `bwt`.
 
-| `c`    | $ | A | B | C |
-|--------|---|---|---|---|
-| `C[c]` | 0 | 1 | 3 | 5 |
+| `c`    | $   | A   | B   | C   |
+| ------ | --- | --- | --- | --- |
+| `C[c]` | 0   | 1   | 3   | 5   |
 
 There is nothing which is small than `$`. So it's 0(`C[$]=0`). There is a `$` which is small than `A`. So it's 1(`C[A]=1`).
 There is 2 `A` and 1 `$`. So it's 5(`C[B]=3`).
 
 Second, create another table. It's different from the last table. The order of the bwt will be considered.
-|   | A, 1 | A, 2 | B, 3 | A, 4 | $, 5 | A, 6 |
-|---|------|------|------|------|------|------|
-| $ | 0    | 0    | 0    | 0    | 1    | 1    |
-| A | 1    | 2    | 2    | 3    | 3    | 4    |
-| B | 0    | 0    | 1    | 1    | 1    | 1    |
 
-The first `0` means there is one `$` from start to current position(`Occ($, 1)=0`). The `4` means there are four `A` from start to current position(`Occ(A, 6)=4`).
-At the third line, `1` means there is one `B` from start to current position.`Occ(B, 1)=0`, `Occ(B, 3)=1`
+|     | C, 1 | $, 2 | B, 3 | A, 4 | A, 5 | B, 6 |
+| --- | ---- | ---- | ---- | ---- | ---- | ---- |
+| $   | 0    | 1    | 1    | 1    | 1    | 1    |
+| A   | 0    | 0    | 0    | 1    | 2    | 2    |
+| B   | 0    | 0    | 1    | 1    | 1    | 2    |
+
+The first `0` means there is no one `$` from start to current position, "1". (`Occ($, 1)=0`). The next `1` means there is one `$` from start to current position, "2".(`Occ($, 2)=1`).
+
+The `2` at second line's last means there are two `A` from start to current position, "6". (`Occ(A, 6)=2`).
+
+At the third line, `1` means there is one `B` from start to current position. `Occ(B, 1)=0`, `Occ(B, 3)=1`
 
 Let's back to the matrix again.
 
@@ -113,7 +117,7 @@ With the help of the second table, we could get `Occ(B, 3)=1`.
 -    5 "BC$ABA"
 -    6 "C$ABAB"
 
-Use the way comes from Wikipedia:
+Use the way comes from Wikipedia to calculate:
 
 ```
 LF(3) = C[L[3]] + Occ(L[3],3)
@@ -128,4 +132,25 @@ Don't forget the `sa`. With the help of it, we know the 4th item of `sa` is the 
 
 With the counting of every item in `bwt`, we could get the whole origin text.
 
-So this is how the Burrows-Wheeler transform (BWT) works. There will be another blog restate on how to use it in the search text.
+So this is how the Burrows-Wheeler transform (BWT) works.
+
+## Search Pattern
+
+Assume we want to search pattern "AB" in "ABABC$". First setp, search "B" by a function. And then search "A" by another function with the result of last step. Let's try.
+
+The first step. `[C["B"] + 1 .. C["B"+1]]`. `[C["B"]]` will get 3 with the help of first table below. `"B"+1` is the next character in Lexicographic order, "C". So step by step, `[C["B"] + 1..C["C"]]`, `[3 + 1, 5]`, `[4, 5]`.
+"4" is the start, and "5" is the end.
+
+The second step, `[C["A"] + Occ("A", start-1) + 1 .. C["A"] + Occ("A", end)]`. The `start` and `end` come from the last step. The result of step by step.
+
+- `[C["A"] + Occ("A", start-1) + 1 .. C["A"] + Occ("A", end)]`
+- `[C["A"] + Occ("A", 4-1) + 1 .. C["A"] + Occ("A", 5)]`
+- `[C["A"] + Occ("A", 3) + 1 .. C["A"] + Occ("A", 5)]`
+- `[C["A"] + Occ("A", 3) + 1 .. C["A"] + Occ("A", 5)]`
+- `[1 + Occ("A", 3) + 1 .. 1 + Occ("A", 5)]`
+- `[1 + 0 + 1 .. 1 + 2]`
+- `[2 .. 3]`
+
+`[2..3]` means from 2nd to 3rd suffix start with the "AB". With the help of `sa`, `sa [6, 1, 3, 2, 4, 5]`, they correspond to `1, 3`. It means "AB" are located in first and third in origin text.
+
+We saw the number of search steps only relate to the long of pattern. This mean the search complete in linear time in the length of the pattern: O(p) time. So this is why it's suitable for search pattern in long text.
